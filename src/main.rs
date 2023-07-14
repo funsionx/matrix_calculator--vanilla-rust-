@@ -3,6 +3,7 @@ use std::io;
 mod basic;
 mod operations;
 
+use crate::basic::get_dimensions::get_dimensions;
 use crate::basic::print::print_matrix;
 use crate::basic::read::read_matrix;
 use crate::operations::{add::add_matrix, multiply::multiply_matrix, subtract::subtract_matrix};
@@ -11,11 +12,7 @@ fn main() {
     println!("Enter the dimensions of the first matrix:");
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
-    let dimensions: Vec<_> = input
-        .trim()
-        .split(' ')
-        .map(|s| s.parse().unwrap())
-        .collect();
+    let dimensions: Vec<_> = get_dimensions(&input);
     let rows_first = dimensions[0];
     let cols_first = dimensions[1];
 
@@ -29,11 +26,7 @@ fn main() {
     println!("Enter the dimensions of the second matrix:");
     input.clear();
     io::stdin().read_line(&mut input).unwrap();
-    let dimensions: Vec<usize> = input
-        .trim()
-        .split(' ')
-        .map(|s| s.parse().unwrap())
-        .collect();
+    let dimensions: Vec<usize> = get_dimensions(&input);
     let rows_second = dimensions[0];
     let cols_second = dimensions[1];
 
